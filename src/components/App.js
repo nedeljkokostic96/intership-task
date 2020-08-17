@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Movies from './Movie/Movies';
 import MovieForm from './MovieForm';
+import DeleteForm from './DeleteForm';
 
 export default class App extends Component {
 
@@ -10,8 +11,9 @@ export default class App extends Component {
 
         this.state = {
             title: 'React Movie Cards',
-            displayForm : false,
-            displayMovies: false
+            addMovieForm : false,
+            displayMovies : false,
+            deleteMovieForm : false
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -19,8 +21,9 @@ export default class App extends Component {
     handleClick(event){
         const {name} = event.target;
         this.setState({
-            displayForm : name === 'displayForm' ? true : false,
+            addMovieForm : name === 'addMovieForm' ? true : false,
             displayMovies : name === 'displayMovies' ? true : false,
+            deleteMovieForm : name === 'deleteMovieForm' ? true : false,
         });
     }
 
@@ -29,11 +32,13 @@ export default class App extends Component {
             <div>
                 <Header title={this.state.title} />
                 <div style={{minHeight: '10vh', textAlign:'center', marginTop: '2vh'}}>
-                    <button name="displayForm" className="btn btn-primary" onClick={this.handleClick}>Add new movie</button>
+                    <button name="addMovieForm" className="btn btn-primary" onClick={this.handleClick}>Add new movie</button>
                     <button name="displayMovies" className="btn btn-primary" onClick={this.handleClick}>Show movies</button>
+                    <button name="deleteMovieForm" className="btn btn-primary" onClick={this.handleClick}>Delete movie</button>
                 </div>
-                {this.state.displayForm ? <MovieForm /> : ''}
+                {this.state.addMovieForm ? <MovieForm /> : ''}
                 {this.state.displayMovies ? <div className="mt-5"><Movies /></div> : ''}
+                {this.state.deleteMovieForm ? <DeleteForm /> : ''}
             </div>
         );
     }
