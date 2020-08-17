@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import MovieList from './MovieList';
 import MovieService from '../../services/MovieService';
-
+import newestMovies from '../MovieForm';
 export default class Movies extends Component {
 
     constructor() {
         super();
 
         this.state = {
-            movies: []
+            movies: [],
+            newMovies: []
         };
     }
 
     componentDidMount() {
-        this.setState(() => ({ movies: MovieService.getMovies() }));
+        this.setState(() => ({ 
+            movies: MovieService.getMovies(),
+            newMovies : newestMovies
+        }));
     }
 
     render() {
@@ -22,6 +26,7 @@ export default class Movies extends Component {
                 <div className="d-flex flex-row">                    
                     <div className="col-sm-12">
                         <MovieList movies={this.state.movies} />
+                        {/*<MovieList movies={this.state.newMovies} />*/}
                     </div>
                 </div>
             </div>
